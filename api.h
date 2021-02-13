@@ -12,7 +12,6 @@ ListaCircular *inicializaLista();
 Numero *inicializaNumero(int numero);
 void insereNumero(Numero *num, ListaCircular *lista);
 int definirLider(int M, ListaCircular* lista);
-void imprime(ListaCircular *lista);
 ListaCircular *liberaLista(ListaCircular *lista);
 void liberaNumero(Numero *numeroItem);
 

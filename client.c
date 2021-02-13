@@ -15,13 +15,12 @@ int main()
     for (int i = N; i >= 0; i--)
         insereNumero(inicializaNumero(i), lista);
 
-    //int L = definirLider(M, lista);
+    int L = definirLider(M, lista);
 
-    //printf("O aluno é: %d", L);
+    printf("O líder é: %d\n", L);
 
-    imprime(lista);
-
-    // lista = liberaLista(lista);
+    
+    //lista = liberaLista(lista);
 
     return 0;
 }

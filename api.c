@@ -56,58 +56,46 @@ void insereNumero(Numero *num, ListaCircular *lista)
     }
 }
 
-void imprime(ListaCircular *lista)
-{
-    TCelula *numeroCelula = lista->ini;
-
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-
-    numeroCelula = numeroCelula->prox;
-    printf("%d ", numeroCelula->numeroItem->numero);
-}
-
 int definirLider(int M, ListaCircular *lista)
 {
-    //TCelula* numeroEncontrado = buscarNumero(M);
+    TCelula *numero = lista->ini;
+
+    while (1)
+    {
+        if (numero->numeroItem->numero == M)
+            break;
+        numero = numero->prox;
+    }
+
+    int iterador = 0;
+    TCelula *aux = numero;
+    numero = aux->prox;
+    free(aux->numeroItem);
+    free(aux);
+
+    while (1)
+    {
+
+        if (numero->prox == lista->ini->prox)
+            return numero->numeroItem->numero;
+
+        for (TCelula *numeroCelula = lista->ini; numeroCelula->prox != lista->ini->prox; numeroCelula = numeroCelula->prox)
+            printf("%d ", numeroCelula->numeroItem->numero);
+        printf("\n");
+
+        if (iterador == M)
+        {
+            iterador = 0;
+            TCelula *aux = numero;
+            numero = aux->prox;
+            free(aux->numeroItem);
+            free(aux);
+        }
+        else
+        {
+            numero = numero->prox;
+        }
+    }
 }
 
 ListaCircular *liberaLista(ListaCircular *lista)
