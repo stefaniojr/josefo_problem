@@ -5,15 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct numero Numero;
 typedef struct listacircular ListaCircular;
 
 ListaCircular *inicializaLista();
-Numero *inicializaNumero(int numero);
-void insereNumero(Numero *num, ListaCircular *lista);
-int definirLider(int M, ListaCircular* lista);
-ListaCircular *liberaLista(ListaCircular *lista);
-void liberaNumero(Numero *numeroItem);
-
+ListaCircular *insereNumero(int num, ListaCircular *lista);
+int definirLider(int M, ListaCircular *lista);
+void imprimir(ListaCircular *lista);
 
 #endif /* API_H_ */

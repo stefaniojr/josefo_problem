@@ -12,15 +12,13 @@ int main()
     ListaCircular *lista;
     lista = inicializaLista();
 
-    for (int i = N; i >= 0; i--)
-        insereNumero(inicializaNumero(i), lista);
+    for (int i = 1; i <= N; i++)
+    {
+        lista = insereNumero(i, lista);
+    }
 
-    int L = definirLider(M, lista);
-
-    printf("O líder é: %d\n", L);
-
-    
-    //lista = liberaLista(lista);
+    int numLider = definirLider(M, lista);
+    printf("O líder é: %d\n", numLider);
 
     return 0;
 }

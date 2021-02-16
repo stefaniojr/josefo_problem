@@ -1,120 +1,86 @@
 #include "api.h"
 
-typedef struct cel TCelula;
-
-struct numero
-{
-    int numero;
-};
-
-struct cel
-{
-    Numero *numeroItem;
-    TCelula *prox;
-};
-
 struct listacircular
 {
-    TCelula *ini;
+    int numero;
+    ListaCircular *prox;
 };
+
+typedef struct listacircular ListaCircular;
 
 ListaCircular *inicializaLista()
 {
     ListaCircular *lista = (ListaCircular *)malloc(sizeof(ListaCircular));
 
-    lista->ini = NULL;
+    lista = NULL;
 
     return lista;
 }
 
-Numero *inicializaNumero(int numero)
+ListaCircular *insereNumero(int num, ListaCircular *lista)
 {
-    Numero *numeroItem = (Numero *)malloc(sizeof(Numero));
-    numeroItem->numero = numero;
+    ListaCircular *no, *p;
+    p = lista;
+    no = (ListaCircular *)malloc(sizeof(ListaCircular));
 
-    return numeroItem;
-}
+    no->numero = num;
+    no->prox = lista;
 
-void insereNumero(Numero *num, ListaCircular *lista)
-{
-    ListaCircular *aux = inicializaLista();
-    TCelula *novoNum = (TCelula *)malloc(sizeof(TCelula));
-
-    novoNum->numeroItem = num;
-    aux->ini = novoNum;
-
-    if (lista->ini == NULL)
+    if (lista == NULL)
     {
-        lista->ini = aux->ini;
-        lista->ini->prox = lista->ini;
+        lista = no;
     }
     else
     {
-        aux->ini->prox = lista->ini->prox;
-        lista->ini->prox = aux->ini;
-        lista->ini = aux->ini;
+        while (p->prox != lista)
+            p = p->prox;
+        p->prox = no;
     }
+    no->prox = lista;
+    return lista;
 }
 
 int definirLider(int M, ListaCircular *lista)
 {
-    TCelula *numero = lista->ini;
-
-    while (1)
-    {
-        if (numero->numeroItem->numero == M)
-            break;
-        numero = numero->prox;
-    }
-
+    ListaCircular *p = lista;
+    ListaCircular *ant = NULL;
+    ListaCircular *aux = NULL;
     int iterador = 0;
-    TCelula *aux = numero;
-    numero = aux->prox;
-    free(aux->numeroItem);
+    int flag = 0;
+
+    while (p != NULL && p->numero != M)
+    {
+        ant = p;
+        p = p->prox;
+    }
+    aux = p;
+    ant->prox = p->prox; // Retira o elemento, fazendo o elemento anterior apontar para o próximo.
+    p = ant;
     free(aux);
 
     while (1)
     {
 
-        if (numero->prox == lista->ini->prox)
-            return numero->numeroItem->numero;
-
-        for (TCelula *numeroCelula = lista->ini; numeroCelula->prox != lista->ini->prox; numeroCelula = numeroCelula->prox)
-            printf("%d ", numeroCelula->numeroItem->numero);
-        printf("\n");
+        if (p->prox->numero == p->numero)
+        {
+            int num = p->prox->numero;
+            free(p);
+            return num;
+        }
 
         if (iterador == M)
         {
+            aux = p;
             iterador = 0;
-            TCelula *aux = numero;
-            numero = aux->prox;
-            free(aux->numeroItem);
+            ant->prox = p->prox;
+            p = ant;
             free(aux);
         }
         else
         {
-            numero = numero->prox;
+            iterador++;
+            ant = p;
+            p = p->prox;
         }
-    }
-}
-
-ListaCircular *liberaLista(ListaCircular *lista)
-{
-    TCelula *numeroCelula = lista->ini;
-
-    while (numeroCelula != NULL)
-    {
-        TCelula *numeroCelulaAtual = numeroCelula->prox;
-        liberaNumero(numeroCelula->numeroItem);
-        free(numeroCelula);
-        numeroCelula = numeroCelulaAtual;
-    }
-
-    free(lista);
-}
-
-void liberaNumero(Numero *numeroItem)
-{
-    if (numeroItem != NULL)
-        free(numeroItem);
+    };
 }
