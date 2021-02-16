@@ -10,10 +10,7 @@ typedef struct listacircular ListaCircular;
 
 ListaCircular *inicializaLista()
 {
-    ListaCircular *lista = (ListaCircular *)malloc(sizeof(ListaCircular));
-
-    lista = NULL;
-
+    ListaCircular *lista = NULL;
     return lista;
 }
 
