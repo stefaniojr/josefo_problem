@@ -46,7 +46,6 @@ int definirLider(int M, ListaCircular *lista)
     ListaCircular *ant = NULL;
     ListaCircular *aux = NULL;
     int iterador = 0;
-    int flag = 0;
 
     while (p != NULL && p->numero != M)
     {
